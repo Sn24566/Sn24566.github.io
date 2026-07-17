@@ -1,14 +1,182 @@
 <!DOCTYPE html>
-<p>&nbsp;</p>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temple Industrial | Industrial &amp; Commercial Properties in Temple, TX</title>
+  <meta name="description" content="Temple Industrial owns and manages over 550,000 SF of industrial, warehouse, and commercial property in Temple, Texas, on the I-35 corridor." />
+  <link rel="icon" type="image/svg+xml" href="logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
 <body>
-<body bgcolor = "LightSkyBlue">
-<center><h1>My name is Spencer Neman, welcome to my site!</h1><center>
 
-<center><img src="https://user-images.githubusercontent.com/82845876/115430022-9d085700-a1c9-11eb-8530-b4bc0a985da6.jpg" width="265" height="266" align="BOTTOM" /></center><hr />
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="logo.svg" alt="Temple Industrial logo" />
+    <div class="nav-wordmark">Temple Industrial<span>Temple, Texas</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="properties.html">Properties</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
 
-<center><h1>About Me</h1><center>
-<center>I am an International Business and Physics major here at UT Austin. I grew up in Temple, Texas. I love doing outdoor activities! <center>
-  
-<center><h1>My Favorite Website</h1><center>
-<p style="text-align: center;"><a href="https://www.redbull.com/int-en/discover">Click Here</a> to go to my favorite site!</p>
+<!-- HERO -->
+<header class="hero">
+  <p class="eyebrow">Temple, Texas &mdash; Central Texas I-35 Corridor</p>
+  <h1>Industrial space in the heart of <em>Central Texas</em></h1>
+  <p class="hero-sub">Temple Industrial owns and manages a portfolio of warehouse, manufacturing, and commercial properties along Temple&rsquo;s premier industrial corridor &mdash; over half a million square feet with direct access to IH-35.</p>
+  <p class="hero-joke">We&rsquo;d say we&rsquo;re 100% industrial &mdash; but one office snuck into the portfolio, so we&rsquo;re 97.9% true to our name.</p>
+  <div class="hero-actions">
+    <a href="properties.html" class="btn btn-solid">View Properties</a>
+    <a href="contact.html" class="btn btn-outline">Get In Touch</a>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats-band">
+  <div class="stats-inner">
+    <div class="stat"><p class="stat-value">559,500</p><p class="stat-label">Total Square Feet</p></div>
+    <div class="stat"><p class="stat-value">9</p><p class="stat-label">Properties</p></div>
+    <div class="stat"><p class="stat-value">108,500</p><p class="stat-label">SF Available Now</p></div>
+    <div class="stat"><p class="stat-value">32.56 <span>AC</span></p><p class="stat-label">Land Available</p></div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="section" id="locations">
+  <div class="section-head">
+    <h2>Our Locations</h2>
+    <p>Every property in the portfolio sits within Temple&rsquo;s industrial corridor, minutes from IH-35. Select a pin to view details.</p>
+    <div class="rule"></div>
+  </div>
+  <div id="map"></div>
+  <div class="map-legend">
+    <span><span class="legend-dot" style="background:#4E8A62;"></span>Available</span>
+    <span><span class="legend-dot" style="background:#8A6FA8;"></span>Available Land</span>
+    <span><span class="legend-dot" style="background:#8B8694;"></span>Occupied</span>
+  </div>
+</section>
+
+<!-- PORTFOLIO PREVIEW -->
+<section class="section" style="padding-top:1rem;">
+  <div class="section-head">
+    <h2>The Portfolio</h2>
+    <p>Nine properties &mdash; warehouse, manufacturing, office, and development-ready land.</p>
+    <div class="rule"></div>
+  </div>
+  <div class="card-grid">
+
+    <a class="card" href="properties.html#eberhardt">
+      <div class="card-media"><img src="eberhardt_aerial.jpg" alt="1600 Eberhardt Rd aerial view" loading="lazy" /></div>
+      <div class="card-body">
+        <span class="badge badge-available">Available Now</span>
+        <p class="card-title">1600 Eberhardt Rd</p>
+        <p class="card-meta">Temple Industrial Park &mdash; Flex / Industrial</p>
+        <p class="card-specs"><strong>108,500 SF</strong> &middot; divisible to ~54,000 SF &middot; 14.26 AC</p>
+      </div>
+    </a>
+
+    <a class="card" href="properties.html#general-bruce-land">
+      <div class="card-media"><img src="general_bruce_aerial1.jpg" alt="2520 N General Bruce Dr aerial view" loading="lazy" /></div>
+      <div class="card-body">
+        <span class="badge badge-land">Land &mdash; For Lease</span>
+        <p class="card-title">2520 N General Bruce Dr</p>
+        <p class="card-meta">IH-35 Frontage &mdash; Industrial Land</p>
+        <p class="card-specs"><strong>32.56 AC</strong> &middot; BNSF rail boundary &middot; build-to-suit</p>
+      </div>
+    </a>
+
+    <a class="card" href="properties.html#range-road-park">
+      <div class="card-media"><iframe src="https://maps.google.com/maps?q=3940+Range+Rd,+Temple,+TX+76504&t=k&z=16&output=embed" loading="lazy" title="Range Road Industrial Park satellite view"></iframe></div>
+      <div class="card-body">
+        <span class="badge badge-occupied">Occupied</span>
+        <p class="card-title">Range Road Industrial Park</p>
+        <p class="card-meta">Five buildings &mdash; Warehouse / Manufacturing</p>
+        <p class="card-specs"><strong>229,000 SF</strong> combined &middot; 5 buildings</p>
+      </div>
+    </a>
+
+    <a class="card" href="properties.html#general-bruce-2501">
+      <div class="card-media"><iframe src="https://maps.google.com/maps?q=2501+N+General+Bruce+Dr,+Temple,+TX+76501&t=k&z=17&output=embed" loading="lazy" title="2501 N General Bruce Dr satellite view"></iframe></div>
+      <div class="card-body">
+        <span class="badge badge-occupied">Occupied</span>
+        <p class="card-title">2501 N General Bruce Dr</p>
+        <p class="card-meta">Warehouse / Manufacturing</p>
+        <p class="card-specs"><strong>210,000 SF</strong> &middot; IH-35 corridor</p>
+      </div>
+    </a>
+
+    <a class="card" href="properties.html#scott-blvd">
+      <div class="card-media"><iframe src="https://maps.google.com/maps?q=2002+W+Scott+Blvd,+Temple,+TX+76504&t=k&z=18&output=embed" loading="lazy" title="2002 W Scott Blvd satellite view"></iframe></div>
+      <div class="card-body">
+        <span class="badge badge-occupied">Occupied</span>
+        <p class="card-title">2002 W Scott Blvd</p>
+        <p class="card-meta">Office</p>
+        <p class="card-specs"><strong>12,000 SF</strong> &middot; the 2.1%</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <h2>Interested in a property?</h2>
+  <p>Reach out to us by email &mdash; please include your company name and the property or space you&rsquo;re interested in.</p>
+  <a href="contact.html" class="btn btn-solid">Contact Us</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Temple Industrial</span>
+  <span class="footer-note">&copy; 2026 Temple Industrial &mdash; Temple, TX. All rights reserved.</span>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map', { scrollWheelZoom: false }).setView([31.113, -97.356], 12);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    maxZoom: 19
+  }).addTo(map);
+
+  var COLORS = { available: '#4E8A62', land: '#8A6FA8', occupied: '#8B8694' };
+
+  var properties = [
+    { name: '1600 Eberhardt Rd',          lat: 31.11708, lng: -97.36280, status: 'available', meta: '108,500 SF · Flex / Industrial · Available Now', anchor: 'eberhardt' },
+    { name: '2520 N General Bruce Dr',    lat: 31.12400, lng: -97.35120, status: 'land',      meta: '32.56 AC Industrial Land · For Lease', anchor: 'general-bruce-land' },
+    { name: '2501 N General Bruce Dr',    lat: 31.12287, lng: -97.34919, status: 'occupied',  meta: '210,000 SF · Warehouse / Manufacturing · Occupied', anchor: 'general-bruce-2501' },
+    { name: '2002 W Scott Blvd',          lat: 31.07948, lng: -97.37075, status: 'occupied',  meta: '12,000 SF · Office · Occupied', anchor: 'scott-blvd' },
+    { name: '3940 Range Rd',              lat: 31.13791, lng: -97.34599, status: 'occupied',  meta: '37,000 SF · Range Road Industrial Park · Occupied', anchor: 'range-road-park' },
+    { name: '3918 Range Rd Ste A',        lat: 31.13756, lng: -97.34612, status: 'occupied',  meta: '30,000 SF · Range Road Industrial Park · Occupied', anchor: 'range-road-park' },
+    { name: '3906 Range Rd',              lat: 31.13737, lng: -97.34619, status: 'occupied',  meta: '32,000 SF · Range Road Industrial Park · Occupied', anchor: 'range-road-park' },
+    { name: '10986 NW H K Dodgen Loop',   lat: 31.14025, lng: -97.34577, status: 'occupied',  meta: '60,000 SF · Range Road Industrial Park · Occupied', anchor: 'range-road-park' },
+    { name: '3831 Lucius McCelvey Dr',    lat: 31.13897, lng: -97.34994, status: 'occupied',  meta: '70,000 SF · Range Road Industrial Park · Occupied', anchor: 'range-road-park' }
+  ];
+
+  properties.forEach(function (p) {
+    var size = (p.status === 'occupied') ? 14 : 18;
+    var icon = L.divIcon({
+      className: '',
+      html: '<div class="pin-marker" style="width:' + size + 'px;height:' + size + 'px;background:' + COLORS[p.status] + ';"></div>',
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2]
+    });
+    L.marker([p.lat, p.lng], { icon: icon })
+      .addTo(map)
+      .bindPopup(
+        '<p class="popup-name">' + p.name + '</p>' +
+        '<p class="popup-meta">' + p.meta + '</p>' +
+        '<a class="popup-link" href="properties.html#' + p.anchor + '">View Details &rarr;</a>'
+      );
+  });
+</script>
+</body>
+</html>
