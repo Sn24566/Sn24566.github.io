@@ -137,8 +137,19 @@
   <!-- RANGE ROAD INDUSTRIAL PARK -->
   <div class="prop" id="range-road-park">
     <div class="prop-split">
-      <div class="prop-media">
-        <iframe src="https://maps.google.com/maps?q=3918+Range+Rd,+Temple,+TX+76504&t=k&z=16&output=embed"
+      <div>
+        <div class="park-photo">
+          <img src="range_road_aerial.jpg" alt="Aerial view of Range Road Industrial Park" />
+          <svg class="park-overlay" viewBox="0 0 1411 943" preserveAspectRatio="none" aria-hidden="true">
+            <polygon data-b="0" points="1035,195 1115,255 1000,352 915,285"><title>3940 Range Rd &mdash; 37,000 SF</title></polygon>
+            <polygon data-b="1" points="958,358 1038,438 952,520 874,440"><title>3918 Range Rd, Ste A &mdash; 30,000 SF</title></polygon>
+            <polygon data-b="3" points="695,307 818,383 735,470 612,395"><title>10986 NW H K Dodgen Loop &mdash; 60,000 SF</title></polygon>
+            <polygon data-b="2" points="643,499 737,558 663,640 571,578"><title>3906 Range Rd &mdash; 32,000 SF</title></polygon>
+            <polygon data-b="4" points="425,330 600,430 490,572 345,458"><title>3831 Lucius McCelvey Dr &mdash; 70,000 SF</title></polygon>
+          </svg>
+        </div>
+        <p class="park-hint">Hover over a building in the photo &mdash; or a row in the table &mdash; to see which is which.</p>
+        <iframe class="park-map-small" src="https://maps.google.com/maps?q=3918+Range+Rd,+Temple,+TX+76504&t=k&z=16&output=embed"
           allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           title="Satellite view of Range Road Industrial Park"></iframe>
       </div>
@@ -146,15 +157,15 @@
         <span class="badge badge-occupied">Occupied &mdash; Fully Leased</span>
         <p class="prop-address">Range Road Industrial Park</p>
         <p class="prop-city">Temple, TX 76504 &mdash; Five-building warehouse park</p>
-        <table class="park-table">
-          <thead><tr><th>Building</th><th>Type</th><th>SF</th></tr></thead>
+        <table class="park-table" id="park-table">
+          <thead><tr><th>Building</th><th>SF</th></tr></thead>
           <tbody>
-            <tr><td>3940 Range Rd</td><td>Warehouse / Mfg</td><td>37,000</td></tr>
-            <tr><td>3918 Range Rd, Ste A</td><td>Warehouse / Mfg</td><td>30,000</td></tr>
-            <tr><td>3906 Range Rd</td><td>Warehouse / Mfg</td><td>32,000</td></tr>
-            <tr><td>10986 NW H K Dodgen Loop</td><td>Warehouse / Mfg</td><td>60,000</td></tr>
-            <tr><td>3831 Lucius McCelvey Dr</td><td>Warehouse / Mfg</td><td>70,000</td></tr>
-            <tr><td>Combined</td><td></td><td>229,000</td></tr>
+            <tr><td>3940 Range Rd</td><td>37,000</td></tr>
+            <tr><td>3918 Range Rd, Ste A</td><td>30,000</td></tr>
+            <tr><td>3906 Range Rd</td><td>32,000</td></tr>
+            <tr><td>10986 NW H K Dodgen Loop</td><td>60,000</td></tr>
+            <tr><td>3831 Lucius McCelvey Dr</td><td>70,000</td></tr>
+            <tr><td>Combined</td><td>229,000</td></tr>
           </tbody>
         </table>
         <ul class="prop-bullets">
@@ -308,6 +319,28 @@
 
   document.getElementById('gb-img').style.transition = 'opacity 0.15s';
   gbBuild();
+
+  /* === Range Road Park — hover sync between photo and table === */
+  (function () {
+    var polys = document.querySelectorAll('.park-overlay polygon');
+    var rows = document.querySelectorAll('#park-table tbody tr');
+    function setHot(i, on) {
+      polys.forEach(function (p) {
+        if (p.getAttribute('data-b') === String(i)) p.classList.toggle('hot', on);
+      });
+      if (rows[i]) rows[i].classList.toggle('hot', on);
+    }
+    polys.forEach(function (p) {
+      var i = parseInt(p.getAttribute('data-b'), 10);
+      p.addEventListener('mouseenter', function () { setHot(i, true); });
+      p.addEventListener('mouseleave', function () { setHot(i, false); });
+    });
+    rows.forEach(function (r, i) {
+      if (i >= 5) return; // skip Combined row
+      r.addEventListener('mouseenter', function () { setHot(i, true); });
+      r.addEventListener('mouseleave', function () { setHot(i, false); });
+    });
+  })();
 </script>
 </body>
 </html>
