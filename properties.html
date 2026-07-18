@@ -105,16 +105,19 @@
         </div>
       </div>
       <div class="prop-body">
-        <span class="badge badge-land">Industrial Land &mdash; Sale / Lease / Build-to-Suit</span>
+        <span class="badge badge-land">Industrial Land &mdash; Sale / Ground Lease / Build-to-Suit</span>
         <p class="prop-address">2606 W Nugent Ave</p>
         <p class="prop-city">Temple, TX 76504 &mdash; Temple Industrial Park</p>
         <div class="spec-grid">
           <div class="spec-item"><p class="spec-label">Lot Size</p><p class="spec-value">32 AC</p></div>
-          <div class="spec-item"><p class="spec-label">Available For</p><p class="spec-value">Sale &middot; Lease &middot; BTS</p></div>
+          <div class="spec-item"><p class="spec-label">Buildable</p><p class="spec-value">Up to 400,000 SF</p></div>
+          <div class="spec-item"><p class="spec-label">Available For</p><p class="spec-value">Sale &middot; Ground Lease &middot; BTS</p></div>
+          <div class="spec-item"><p class="spec-label">Use</p><p class="spec-value">Industrial / Whse / Mfg</p></div>
         </div>
         <div class="highlight">Directly borders Meta&rsquo;s $800M hyperscale data center campus and our 1600 Eberhardt Rd property.</div>
         <ul class="prop-bullets">
           <li>32 development-ready acres in Temple Industrial Park</li>
+          <li>Supports up to 400,000 SF of warehouse / manufacturing</li>
           <li>Adjacent to Meta&rsquo;s data center land</li>
           <li>Adjacent to 1600 Eberhardt Rd (108,500 SF facility)</li>
           <li>Frontage on W Nugent Ave &mdash; minutes from IH-35</li>
@@ -138,16 +141,19 @@
     </div>
     <div class="prop-split">
       <div class="prop-body">
-        <span class="badge badge-land">Industrial Land &mdash; For Lease</span>
+        <span class="badge badge-land">Industrial Land &mdash; Sale / Ground Lease / Build-to-Suit</span>
         <p class="prop-address">2520 N General Bruce Dr</p>
         <p class="prop-city">Temple, TX 76501 &mdash; IH-35 Frontage</p>
         <div class="spec-grid">
           <div class="spec-item"><p class="spec-label">Lot Size</p><p class="spec-value">32.56 AC</p></div>
+          <div class="spec-item"><p class="spec-label">Buildable</p><p class="spec-value">Up to 400,000 SF</p></div>
           <div class="spec-item"><p class="spec-label">Zoning</p><p class="spec-value">Heavy &amp; Light Ind.</p></div>
+          <div class="spec-item"><p class="spec-label">Available For</p><p class="spec-value">Sale &middot; Ground Lease &middot; BTS</p></div>
           <div class="spec-item"><p class="spec-label">Rail</p><p class="spec-value">&plusmn;2,040 FT BNSF</p></div>
           <div class="spec-item"><p class="spec-label">Power</p><p class="spec-value">3-Phase / Full Utilities</p></div>
         </div>
         <ul class="prop-bullets">
+          <li>Supports up to 400,000 SF of warehouse / manufacturing</li>
           <li>Direct IH-35 visibility &amp; frontage access</li>
           <li>BNSF Rail line along full west boundary</li>
           <li>Existing stabilized areas &amp; driveways on site</li>
@@ -251,10 +257,20 @@
   <!-- 2002 W SCOTT BLVD -->
   <div class="prop" id="scott-blvd">
     <div class="prop-split">
-      <div class="prop-media">
-        <iframe src="https://maps.google.com/maps?q=2002+W+Scott+Blvd,+Temple,+TX+76504&t=k&z=18&output=embed"
+      <div class="prop-media" id="sc-media">
+        <img id="sc-photo" src="scott3.jpg" alt="Front exterior of 2002 W Scott Blvd, Temple TX" style="opacity:1;transition:opacity 0.2s;" />
+        <iframe id="sc-map"
+          src="https://maps.google.com/maps?q=2002+W+Scott+Blvd,+Temple,+TX+76504&t=k&z=18&output=embed"
           allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          title="Satellite view of 2002 W Scott Blvd"></iframe>
+          title="Satellite view of 2002 W Scott Blvd"
+          style="opacity:0;transition:opacity 0.2s;pointer-events:none;"></iframe>
+        <div class="media-toggles">
+          <button class="media-toggle-btn active" id="sc-btn-photo" onclick="scToggle('photo')">Photos</button>
+          <button class="media-toggle-btn inactive" id="sc-btn-map" onclick="scToggle('map')">Map</button>
+        </div>
+        <button class="gallery-prev" id="sc-prev" onclick="scNav(-1)" aria-label="Previous photo">&#8592;</button>
+        <button class="gallery-next" id="sc-next" onclick="scNav(1)" aria-label="Next photo">&#8594;</button>
+        <div class="gallery-dots" id="sc-dots"></div>
       </div>
       <div class="prop-body">
         <span class="badge badge-occupied">Occupied &mdash; Fully Leased</span>
@@ -349,6 +365,69 @@
   }
 
   ebBuild();
+
+  /* === 2002 W Scott Blvd — Photo gallery + Map toggle === */
+  var scSlides = [
+    { src: 'scott3.jpg', label: 'Front exterior of 2002 W Scott Blvd' },
+    { src: 'scott4.jpg', label: 'Side exterior of 2002 W Scott Blvd' },
+    { src: 'scott1.jpg', label: 'Bird’s-eye view of 2002 W Scott Blvd' },
+    { src: 'scott2.jpg', label: 'Conference room' }
+  ];
+  var scCurrent = 0;
+
+  function scBuild() {
+    var dotsEl = document.getElementById('sc-dots');
+    dotsEl.innerHTML = '';
+    scSlides.forEach(function (_, i) {
+      var d = document.createElement('button');
+      d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+      d.onclick = function () { scCurrent = i; scUpdate(); };
+      dotsEl.appendChild(d);
+    });
+  }
+
+  function scNav(dir) {
+    scCurrent = (scCurrent + dir + scSlides.length) % scSlides.length;
+    scUpdate();
+  }
+
+  function scUpdate() {
+    var s = scSlides[scCurrent];
+    var img = document.getElementById('sc-photo');
+    img.style.opacity = '0';
+    setTimeout(function () {
+      img.src = s.src;
+      img.alt = s.label;
+      img.style.opacity = '1';
+    }, 150);
+    document.querySelectorAll('#sc-dots .gallery-dot').forEach(function (d, i) {
+      d.className = 'gallery-dot' + (i === scCurrent ? ' active' : '');
+    });
+  }
+
+  function scToggle(mode) {
+    var photo = document.getElementById('sc-photo');
+    var mapEl = document.getElementById('sc-map');
+    var btnP = document.getElementById('sc-btn-photo');
+    var btnM = document.getElementById('sc-btn-map');
+    var galleryUI = [document.getElementById('sc-prev'), document.getElementById('sc-next'), document.getElementById('sc-dots')];
+    if (mode === 'photo') {
+      photo.style.opacity = '1'; photo.style.pointerEvents = 'auto';
+      mapEl.style.opacity = '0'; mapEl.style.pointerEvents = 'none';
+      btnP.className = 'media-toggle-btn active';
+      btnM.className = 'media-toggle-btn inactive';
+      galleryUI.forEach(function (el) { el.style.display = ''; });
+    } else {
+      mapEl.style.opacity = '1'; mapEl.style.pointerEvents = 'auto';
+      photo.style.opacity = '0'; photo.style.pointerEvents = 'none';
+      btnM.className = 'media-toggle-btn active';
+      btnP.className = 'media-toggle-btn inactive';
+      galleryUI.forEach(function (el) { el.style.display = 'none'; });
+    }
+  }
+
+  scBuild();
 
   /* === 2606 W Nugent — Photo / Map toggle === */
   function wnToggle(mode) {
