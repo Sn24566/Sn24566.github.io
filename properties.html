@@ -146,6 +146,11 @@
             <polygon data-b="3" points="941,496 1230,398 1309,631 1021,731"><title>10986 NW H K Dodgen Loop &mdash; 60,000 SF</title></polygon>
             <polygon data-b="2" points="871,837 1092,765 1143,933 924,1007"><title>3906 Range Rd &mdash; 32,000 SF</title></polygon>
             <polygon data-b="4" points="551,464 880,596 787,967 479,829"><title>3831 Lucius McCelvey Dr &mdash; 70,000 SF</title></polygon>
+            <circle class="park-dot" data-b="0" cx="1706" cy="335" r="34"></circle>
+            <circle class="park-dot" data-b="1" cx="1596" cy="632" r="34"></circle>
+            <circle class="park-dot" data-b="3" cx="1125" cy="564" r="34"></circle>
+            <circle class="park-dot" data-b="2" cx="1007" cy="885" r="34"></circle>
+            <circle class="park-dot" data-b="4" cx="674" cy="714" r="34"></circle>
           </svg>
         </div>
         <p class="park-hint">Hover over a building in the photo &mdash; or a row in the table &mdash; to see which is which.</p>
@@ -323,10 +328,11 @@
   /* === Range Road Park — hover sync between photo and table === */
   (function () {
     var polys = document.querySelectorAll('.park-overlay polygon');
+    var dots = document.querySelectorAll('.park-overlay .park-dot');
     var rows = document.querySelectorAll('#park-table tbody tr');
     function setHot(i, on) {
-      polys.forEach(function (p) {
-        if (p.getAttribute('data-b') === String(i)) p.classList.toggle('hot', on);
+      dots.forEach(function (d) {
+        if (d.getAttribute('data-b') === String(i)) d.classList.toggle('hot', on);
       });
       if (rows[i]) rows[i].classList.toggle('hot', on);
     }
