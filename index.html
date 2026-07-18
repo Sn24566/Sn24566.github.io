@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
 
@@ -59,8 +59,7 @@
   <div id="map"></div>
   <div class="map-legend">
     <span><span class="legend-dot" style="background:#4E8A62;"></span>Available</span>
-    <span><span class="legend-dot" style="background:#8A6FA8;"></span>Available Land</span>
-    <span><span class="legend-dot" style="background:#8B8694;"></span>Occupied</span>
+    <span><span class="legend-dot" style="background:#8A6FA8;"></span>Occupied</span>
   </div>
 </section>
 
@@ -157,7 +156,7 @@
     maxZoom: 19
   }).addTo(map);
 
-  var COLORS = { available: '#4E8A62', land: '#8A6FA8', occupied: '#8B8694' };
+  var COLORS = { available: '#4E8A62', land: '#4E8A62', occupied: '#8A6FA8' };
 
   var properties = [
     { name: '1600 Eberhardt Rd',          lat: 31.11708, lng: -97.36280, status: 'available', meta: '108,500 SF · Flex / Industrial · Available Now', anchor: 'eberhardt' },
