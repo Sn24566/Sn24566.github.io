@@ -52,9 +52,12 @@
           title="Map of 1600 Eberhardt Rd"
           style="opacity:0;transition:opacity 0.2s;pointer-events:none;"></iframe>
         <div class="media-toggles">
-          <button class="media-toggle-btn active" id="eb-btn-photo" onclick="ebToggle('photo')">Photo</button>
+          <button class="media-toggle-btn active" id="eb-btn-photo" onclick="ebToggle('photo')">Photos</button>
           <button class="media-toggle-btn inactive" id="eb-btn-map" onclick="ebToggle('map')">Map</button>
         </div>
+        <button class="gallery-prev" id="eb-prev" onclick="ebNav(-1)" aria-label="Previous photo">&#8592;</button>
+        <button class="gallery-next" id="eb-next" onclick="ebNav(1)" aria-label="Next photo">&#8594;</button>
+        <div class="gallery-dots" id="eb-dots"></div>
       </div>
       <div class="prop-body">
         <span class="badge badge-available">Available Now</span>
@@ -275,24 +278,68 @@
 </footer>
 
 <script>
-  /* === 1600 Eberhardt — Photo / Map toggle === */
+  /* === 1600 Eberhardt — Photo gallery + Map toggle === */
+  var ebSlides = [
+    { src: 'eberhardt_aerial.jpg', label: 'Aerial view of 1600 Eberhardt Rd' },
+    { src: 'eberhardt_ext.jpg', label: 'Building exterior along Eberhardt Rd' },
+    { src: 'eberhardt_interior_lobby.jpg', label: 'Lobby and reception' },
+    { src: 'eberhardt_int1.jpg', label: 'Open office floor' }
+  ];
+  var ebCurrent = 0;
+
+  function ebBuild() {
+    var dotsEl = document.getElementById('eb-dots');
+    dotsEl.innerHTML = '';
+    ebSlides.forEach(function (_, i) {
+      var d = document.createElement('button');
+      d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+      d.onclick = function () { ebCurrent = i; ebUpdate(); };
+      dotsEl.appendChild(d);
+    });
+  }
+
+  function ebNav(dir) {
+    ebCurrent = (ebCurrent + dir + ebSlides.length) % ebSlides.length;
+    ebUpdate();
+  }
+
+  function ebUpdate() {
+    var s = ebSlides[ebCurrent];
+    var img = document.getElementById('eb-photo');
+    img.style.opacity = '0';
+    setTimeout(function () {
+      img.src = s.src;
+      img.alt = s.label;
+      img.style.opacity = '1';
+    }, 150);
+    document.querySelectorAll('#eb-dots .gallery-dot').forEach(function (d, i) {
+      d.className = 'gallery-dot' + (i === ebCurrent ? ' active' : '');
+    });
+  }
+
   function ebToggle(mode) {
     var photo = document.getElementById('eb-photo');
     var mapEl = document.getElementById('eb-map');
     var btnP = document.getElementById('eb-btn-photo');
     var btnM = document.getElementById('eb-btn-map');
+    var galleryUI = [document.getElementById('eb-prev'), document.getElementById('eb-next'), document.getElementById('eb-dots')];
     if (mode === 'photo') {
       photo.style.opacity = '1'; photo.style.pointerEvents = 'auto';
       mapEl.style.opacity = '0'; mapEl.style.pointerEvents = 'none';
       btnP.className = 'media-toggle-btn active';
       btnM.className = 'media-toggle-btn inactive';
+      galleryUI.forEach(function (el) { el.style.display = ''; });
     } else {
       mapEl.style.opacity = '1'; mapEl.style.pointerEvents = 'auto';
       photo.style.opacity = '0'; photo.style.pointerEvents = 'none';
       btnM.className = 'media-toggle-btn active';
       btnP.className = 'media-toggle-btn inactive';
+      galleryUI.forEach(function (el) { el.style.display = 'none'; });
     }
   }
+
+  ebBuild();
 
   /* === 2520 General Bruce — Image gallery === */
   var gbSlides = [
