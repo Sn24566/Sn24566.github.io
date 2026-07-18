@@ -92,8 +92,17 @@
   <!-- 2606 W NUGENT AVE (LAND) -->
   <div class="prop" id="w-nugent">
     <div class="prop-split">
-      <div class="prop-media">
-        <img src="w_nugent_land.jpg" alt="Aerial view of 2606 W Nugent Ave land parcel, bordering Meta and 1600 Eberhardt Rd" />
+      <div class="prop-media" id="wn-media">
+        <img id="wn-photo" src="w_nugent_land.jpg" alt="Aerial view of 2606 W Nugent Ave land parcel, bordering Meta and 1600 Eberhardt Rd" style="opacity:1;transition:opacity 0.2s;" />
+        <iframe id="wn-map"
+          src="https://maps.google.com/maps?q=2606+W+Nugent+Ave,+Temple,+TX+76504&z=15&output=embed"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Map of 2606 W Nugent Ave"
+          style="opacity:0;transition:opacity 0.2s;pointer-events:none;"></iframe>
+        <div class="media-toggles">
+          <button class="media-toggle-btn active" id="wn-btn-photo" onclick="wnToggle('photo')">Photo</button>
+          <button class="media-toggle-btn inactive" id="wn-btn-map" onclick="wnToggle('map')">Map</button>
+        </div>
       </div>
       <div class="prop-body">
         <span class="badge badge-land">Industrial Land &mdash; Sale / Lease / Build-to-Suit</span>
@@ -340,6 +349,25 @@
   }
 
   ebBuild();
+
+  /* === 2606 W Nugent — Photo / Map toggle === */
+  function wnToggle(mode) {
+    var photo = document.getElementById('wn-photo');
+    var mapEl = document.getElementById('wn-map');
+    var btnP = document.getElementById('wn-btn-photo');
+    var btnM = document.getElementById('wn-btn-map');
+    if (mode === 'photo') {
+      photo.style.opacity = '1'; photo.style.pointerEvents = 'auto';
+      mapEl.style.opacity = '0'; mapEl.style.pointerEvents = 'none';
+      btnP.className = 'media-toggle-btn active';
+      btnM.className = 'media-toggle-btn inactive';
+    } else {
+      mapEl.style.opacity = '1'; mapEl.style.pointerEvents = 'auto';
+      photo.style.opacity = '0'; photo.style.pointerEvents = 'none';
+      btnM.className = 'media-toggle-btn active';
+      btnP.className = 'media-toggle-btn inactive';
+    }
+  }
 
   /* === 2520 General Bruce — Image gallery === */
   var gbSlides = [
